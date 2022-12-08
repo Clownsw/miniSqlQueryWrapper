@@ -4,7 +4,7 @@
 
 # 例子
 ```java
-Wrapper queryWrapper = new QueryWrapper()
+Wrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user")
 		.eq("user_name", "xuda")
 		.eq("pass_word", 123123)
 		.orderByDesc("create_time")
@@ -14,5 +14,5 @@ System.out.println(queryWrapper.buildSql());
 ```
 
 ```sql
-WHERE user_name = xuda AND pass_word = 123123 ORDER BY DESC create_time LIMIT 5, 10
+SELECT * FROM t_user WHERE user_name = xuda AND pass_word = 123123 ORDER BY DESC create_time LIMIT 5, 10
 ```

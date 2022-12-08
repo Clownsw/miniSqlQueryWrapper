@@ -20,7 +20,7 @@ public class App {
     }
 
     public static void testQueryWrapper() {
-        Wrapper queryWrapper = new QueryWrapper()
+        Wrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user")
                 .eq("user_name", "xuda")
                 .eq("pass_word", 123123)
                 .orderByDesc("create_time")
