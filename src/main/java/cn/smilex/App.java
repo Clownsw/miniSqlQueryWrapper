@@ -9,6 +9,7 @@ public class App {
         // testWrapperInstruction();
         // testWrapperInstruction2();
         testQueryWrapper();
+        testQueryWrapperFilter();
         // testSetStringValue();
     }
 
@@ -35,6 +36,16 @@ public class App {
                 .limit(5L, 10L);
 
         System.out.println(queryWrapper.buildSql());
+        // SELECT * FROM t_user WHERE user_name = xuda AND pass_word = 123123 ORDER BY DESC create_time LIMIT 5, 10
+    }
+
+    private static void testQueryWrapperFilter() {
+        Wrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user");
+        queryWrapper.filter(() -> true, q -> q.eq("user_name", "xuda"))
+                .filter(() -> false, q -> q.eq("age", 50));
+
+        System.out.println(queryWrapper.buildSql());
+        // SELECT * FROM t_user WHERE user_name = xuda
     }
 
     @SuppressWarnings("all")
