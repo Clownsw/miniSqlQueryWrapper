@@ -34,7 +34,6 @@ public class WrapperInstruction implements Comparable<WrapperInstruction> {
             tmp = WrapperUtil.replace(
                     tmp,
                     tmp.indexOf(WrapperConfig.SPLICE),
-                    WrapperConfig.SPLICE.length(),
                     value.toString()
             );
         }

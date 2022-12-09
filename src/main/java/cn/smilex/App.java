@@ -5,6 +5,7 @@ package cn.smilex;
  */
 public class App {
     public static void main(String[] args) {
+        testReplace();
         // testWrapperInstruction();
         // testWrapperInstruction2();
         testQueryWrapper();
@@ -29,10 +30,14 @@ public class App {
         System.out.println(queryWrapper.buildSql());
     }
 
+    @SuppressWarnings("all")
     public static void testReplace() {
-        String str = "{} = {}";
-        str = WrapperUtil.replace(str, 0, 2, "name");
-        str = WrapperUtil.replace(str, str.indexOf("{}"), 2, "xuda");
+        String[] params = {"user_name", "xuda", "xuda2", "xuda3"};
+        String str = "{} = {} = {} = {}";
+        str = WrapperUtil.replace(str, str.indexOf("{}"), params[0]);
+        str = WrapperUtil.replace(str, str.indexOf("{}"), params[1]);
+        str = WrapperUtil.replace(str, str.indexOf("{}"), params[2]);
+        str = WrapperUtil.replace(str, str.indexOf("{}"), params[3]);
         System.out.println(str);
     }
 }
