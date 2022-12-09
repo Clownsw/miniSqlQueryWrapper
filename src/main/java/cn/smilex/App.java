@@ -5,10 +5,17 @@ package cn.smilex;
  */
 public class App {
     public static void main(String[] args) {
-        testReplace();
+        // testReplace();
         // testWrapperInstruction();
         // testWrapperInstruction2();
         testQueryWrapper();
+        // testSetStringValue();
+    }
+
+    private static void testSetStringValue() {
+        String str = "";
+        ReflectionUtil.setStringValue(str, new char[]{'a', 'b', 'c'});
+        System.out.println(str);
     }
 
     public static void testWrapperInstruction() {

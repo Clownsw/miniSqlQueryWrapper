@@ -1,5 +1,7 @@
 package cn.smilex;
 
+import java.util.Arrays;
+
 /**
  * @author smilex
  */
@@ -14,13 +16,13 @@ public final class WrapperUtil {
     public static String subString(String str, int beginIndex) {
         char[] value = str.toCharArray();
         int subLen = value.length - beginIndex;
-        return (beginIndex == 0) ? str : new String(value, beginIndex, subLen);
+        return (beginIndex == 0) ? str : ReflectionUtil.setStringValue("", Arrays.copyOfRange(value, beginIndex, beginIndex + subLen));
     }
 
     public static String subString(String str, int beginIndex, int endIndex) {
         char[] value = str.toCharArray();
         int subLen = endIndex - beginIndex;
         return ((beginIndex == 0) && (endIndex == value.length)) ? str
-                : new String(value, beginIndex, subLen);
+                : ReflectionUtil.setStringValue("", Arrays.copyOfRange(value, beginIndex, beginIndex + subLen));
     }
 }
