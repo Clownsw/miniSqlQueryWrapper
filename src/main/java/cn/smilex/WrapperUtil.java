@@ -1,5 +1,9 @@
 package cn.smilex;
 
+import lombok.SneakyThrows;
+
+import java.lang.invoke.SerializedLambda;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -24,5 +28,21 @@ public final class WrapperUtil {
         int subLen = endIndex - beginIndex;
         return ((beginIndex == 0) && (endIndex == value.length)) ? str
                 : ReflectionUtil.setStringValue("", Arrays.copyOfRange(value, beginIndex, beginIndex + subLen));
+    }
+
+    @SneakyThrows
+    public static SerializedLambda lambdaToSerializedLambda(Object lambda) {
+        Method method = lambda.getClass().getDeclaredMethod("writeReplace");
+        method.setAccessible(true);
+        return (SerializedLambda) method.invoke(lambda);
+    }
+
+    public static String toLowerCaseFirstOne(String str) {
+        if (Character.isLowerCase(str.charAt(0))) {
+            return str;
+        }
+
+        return Character.toLowerCase(str.charAt(0)) +
+                str.substring(1);
     }
 }

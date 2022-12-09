@@ -7,6 +7,8 @@ public class WrapperConfig {
     public static final String EMPTY_STRING = "";
     public static final String SPACE = " ";
     public static final String SPLICE = "{}";
+    public static final String GET = "get";
+
     public static final WrapperInstruction WHERE = new WrapperInstruction(1, WrapperInstructionType.WHERE, "WHERE");
     public static final WrapperInstruction AND = new WrapperInstruction(1, WrapperInstructionType.AND, "AND");
     public static final WrapperInstruction EQ = new WrapperInstruction(1, WrapperInstructionType.EQ, "{} = {}");

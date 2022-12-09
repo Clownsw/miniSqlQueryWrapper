@@ -8,8 +8,9 @@ public class App {
         // testReplace();
         // testWrapperInstruction();
         // testWrapperInstruction2();
-        testQueryWrapper();
-        testQueryWrapperFilter();
+        // testQueryWrapper();
+        // testQueryWrapperFilter();
+        testLambdaQueryWrapper();
         // testSetStringValue();
     }
 
@@ -29,7 +30,7 @@ public class App {
     }
 
     public static void testQueryWrapper() {
-        Wrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user")
+        AbstractWrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user")
                 .eq("user_name", "xuda")
                 .eq("pass_word", 123123)
                 .orderByDesc("create_time")
@@ -40,12 +41,22 @@ public class App {
     }
 
     private static void testQueryWrapperFilter() {
-        Wrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user");
+        QueryWrapper queryWrapper = new QueryWrapper("SELECT * FROM t_user");
         queryWrapper.filter(() -> true, q -> q.eq("user_name", "xuda"))
                 .filter(() -> false, q -> q.eq("age", 50));
 
         System.out.println(queryWrapper.buildSql());
         // SELECT * FROM t_user WHERE user_name = xuda
+    }
+
+    public static void testLambdaQueryWrapper() {
+        LambdaQueryWrapper<Person> queryWrapper = new LambdaQueryWrapper<>("SELECT * FROM t_user");
+        queryWrapper.filter(() -> true, q -> q.eq(Person::getName, "xuda"))
+                .filter(() -> false, q -> q.eq(Person::getAge, 40))
+                .filter(() -> true, q -> q.orderByDesc(Person::getCreateTime))
+                .filter(() -> true, q -> q.limit(1L, 10L));
+        System.out.println(queryWrapper.buildSql());
+        // SELECT * FROM t_user ORDER BY DESC create_time LIMIT 1, 10
     }
 
     @SuppressWarnings("all")
